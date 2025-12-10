@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-bg {
+            background-image: url('https://picsum.photos/1920/1080');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="hero position-relative d-flex align-items-center" style="height: 70vh;">
+
+        <!-- Background Image -->
+        <div class="hero-bg position-absolute top-0 start-0 w-100 h-100">
+        </div>
+
+        <!-- Overlay -->
+        <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"
+            style="background-color: rgba(0,0,0,0.55);">
+        </div>
+
+        <!-- Content -->
+        <div class="container position-relative text-white text-center">
+            <h1 class="display-4 fw-bold">Welcome to Our Website</h1>
+            <p class="lead">Your journey to modern web design begins here.</p>
+            <a href="#" class="btn btn-primary btn-lg mt-3">Get Started</a>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

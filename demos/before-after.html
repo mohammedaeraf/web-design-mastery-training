@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .magic-link {
+        position: relative; /* Acts as an anchor for the pseudo-elements */
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+      }
+
+      /* 1. Adding an emoji BEFORE the text */
+      .magic-link::before {
+        content: "✨"; /* Decorative emoji */
+      }
+      /* 2. Adding a decorative line AFTER the text */
+      .magic-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0%; /* Start at zero width */
+        height: 2px;
+        background-color: #ff4757;
+        transition: width 0.3s ease; /* Animate the growth */
+      }
+
+      /* Triggering the 'after' element on hover */
+      .magic-link:hover::after {
+        width: 100%; /* Line grows to full width */
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" class="magic-link">Hover over me </a>
+  </body>
+</html>

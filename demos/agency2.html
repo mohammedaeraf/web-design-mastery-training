@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>APEX Digital — Marketing That Moves</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #F5F0E8;
+      --ink: #0D0D0D;
+      --acid: #C8FF00;
+      --rust: #E8440A;
+      --slate: #1A1A2E;
+      --mid: #4A4A5A;
+      --border: rgba(13,13,13,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, .brand {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    .navbar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .brand span {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--acid);
+      padding: 0 6px;
+      border-radius: 3px;
+    }
+
+    .navbar-nav .nav-link {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid) !important;
+      transition: color 0.2s;
+      padding: 0.4rem 1rem !important;
+    }
+
+    .navbar-nav .nav-link:hover { color: var(--ink) !important; }
+
+    .btn-nav {
+      background: var(--ink);
+      color: var(--acid) !important;
+      border-radius: 2px;
+      padding: 0.45rem 1.2rem !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+
+    .btn-nav:hover {
+      background: var(--rust) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(6rem, 18vw, 22rem);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(13,13,13,0.06);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--acid);
+      color: var(--ink);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--mid);
+      max-width: 420px;
+      line-height: 1.65;
+      margin-top: 1.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-ctas {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn-primary-apex {
+      background: var(--ink);
+      color: var(--acid);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary-apex:hover {
+      background: var(--rust);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-apex {
+      background: transparent;
+      color: var(--ink);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 0.9rem 2rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-outline-apex:hover {
+      background: var(--ink);
+      color: var(--acid);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    /* hero visual side */
+    .hero-visual {
+      position: relative;
+      height: 520px;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .card-float {
+      position: absolute;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.1);
+      padding: 1.4rem 1.6rem;
+      border: 1px solid var(--border);
+    }
+
+    .card-main {
+      width: 280px;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float1 6s ease-in-out infinite;
+    }
+
+    .card-metric {
+      width: 180px;
+      bottom: 100px;
+      right: 0;
+      animation: float2 5s 1s ease-in-out infinite;
+    }
+
+    .card-tag2 {
+      width: 160px;
+      top: 200px;
+      left: -20px;
+      animation: float3 7s 0.5s ease-in-out infinite;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.6rem;
+    }
+
+    .growth-bar-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+    .growth-bar-label { display: flex; justify-content: space-between; font-size: 0.78rem; }
+    .growth-bar-label span:last-child { font-weight: 600; color: var(--rust); }
+    .growth-bar-track { height: 6px; background: #eee; border-radius: 99px; overflow: hidden; }
+    .growth-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--acid), var(--rust)); }
+
+    .big-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); }
+    .big-num span { color: var(--rust); }
+    .big-sub { font-size: 0.78rem; color: var(--mid); margin-top: 0.2rem; }
+
+    .pill {
+      display: inline-block;
+      background: var(--acid);
+      color: var(--ink);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 99px;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--ink);
+      padding: 1rem 0;
+      overflow: hidden;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.6;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    .marquee-dot { color: var(--acid); font-size: 1.2rem; }
+
+    /* ── SERVICES ── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--rust);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--ink);
+    }
+
+    section { padding: 6rem 0; }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2.5rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--acid), var(--rust));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    }
+
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--ink);
+      color: var(--acid);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover .service-icon { background: var(--rust); }
+
+    .service-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      color: var(--ink);
+    }
+
+    .service-card p {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tag {
+      font-size: 0.72rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--mid);
+    }
+
+    /* ── PROCESS ── */
+    #process { background: var(--ink); }
+
+    #process .section-label { color: var(--acid); }
+    #process .section-label::before { background: var(--acid); }
+    #process .section-title { color: var(--cream); }
+
+    .process-step {
+      position: relative;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      transition: opacity 0.2s;
+    }
+
+    .process-step:hover { opacity: 0.9; }
+
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--acid);
+      letter-spacing: 0.1em;
+      min-width: 36px;
+      padding-top: 0.2rem;
+    }
+
+    .step-body h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-body p { font-size: 0.9rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+
+    .process-visual {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 2.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    .big-icon {
+      font-size: 4rem;
+      color: var(--acid);
+      opacity: 0.9;
+    }
+
+    .process-visual p {
+      font-size: 0.9rem;
+      color: rgba(245,240,232,0.5);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    /* ── PORTFOLIO ── */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+
+    .port-item {
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+
+    .port-item:nth-child(1) { grid-column: span 5; aspect-ratio: auto; height: 340px; }
+    .port-item:nth-child(2) { grid-column: span 7; aspect-ratio: auto; height: 340px; }
+    .port-item:nth-child(3) { grid-column: span 4; aspect-ratio: auto; height: 260px; }
+    .port-item:nth-child(4) { grid-column: span 4; aspect-ratio: auto; height: 260px; }
+    .port-item:nth-child(5) { grid-column: span 4; aspect-ratio: auto; height: 260px; }
+
+    .port-bg {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      transition: transform 0.4s ease;
+    }
+
+    .port-item:hover .port-bg { transform: scale(1.05); }
+
+    .port-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .port-item:hover .port-overlay { opacity: 1; }
+
+    .port-label { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; font-size: 1rem; }
+    .port-cat { font-size: 0.75rem; color: var(--acid); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* ── WHY US ── */
+    #why { background: var(--cream); }
+
+    .why-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #fff;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+
+    .why-icon {
+      font-size: 1.8rem;
+      color: var(--rust);
+      margin-bottom: 1rem;
+    }
+
+    .why-card h5 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-card p { font-size: 0.88rem; color: var(--mid); line-height: 1.7; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: #f0ece0; }
+
+    .testi-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      height: 100%;
+    }
+
+    .testi-stars { color: var(--rust); font-size: 0.85rem; margin-bottom: 1rem; }
+
+    .testi-text {
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+
+    .testi-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .testi-role { font-size: 0.78rem; color: var(--mid); }
+
+    /* ── CTA ── */
+    #cta {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 8rem 0;
+    }
+
+    #cta::before {
+      content: 'APEX';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(8rem, 22vw, 28rem);
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    #cta h2 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--cream);
+      line-height: 1;
+      position: relative;
+    }
+
+    #cta h2 em { color: var(--acid); font-style: italic; }
+
+    #cta p {
+      font-size: 1rem;
+      color: rgba(245,240,232,0.55);
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .cta-buttons { margin-top: 2.5rem; position: relative; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-acid {
+      background: var(--acid);
+      color: var(--ink);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 1rem 2.2rem;
+      border: none;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-acid:hover { background: #d4ff00; transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 1rem 2.2rem;
+      border: 1.5px solid rgba(245,240,232,0.25);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      padding: 4rem 0 2rem;
+      color: rgba(245,240,232,0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .footer-brand span {
+      background: var(--acid);
+      color: var(--ink);
+      padding: 0 5px;
+      border-radius: 3px;
+    }
+
+    .footer-desc { margin-top: 0.8rem; max-width: 240px; line-height: 1.7; }
+
+    .footer-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    footer ul { list-style: none; padding: 0; }
+    footer ul li { margin-bottom: 0.6rem; }
+    footer ul li a {
+      color: rgba(245,240,232,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-size: 0.85rem;
+    }
+
+    footer ul li a:hover { color: var(--acid); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+
+    .social-links { display: flex; gap: 0.8rem; }
+
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(245,240,232,0.5);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .social-btn:hover {
+      border-color: var(--acid);
+      color: var(--acid);
+      transform: translateY(-2px);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float1 {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(-14px); }
+    }
+
+    @keyframes float2 {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    @keyframes float3 {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(12px); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 991px) {
+      .hero-visual { display: none; }
+      .port-item:nth-child(1) { grid-column: span 12; }
+      .port-item:nth-child(2) { grid-column: span 12; }
+      .port-item:nth-child(3),
+      .port-item:nth-child(4),
+      .port-item:nth-child(5) { grid-column: span 6; }
+    }
+
+    @media (max-width: 575px) {
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      .port-item:nth-child(3),
+      .port-item:nth-child(4),
+      .port-item:nth-child(5) { grid-column: span 12; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="brand" href="#">APE<span>X</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+        <li class="nav-item"><a class="nav-link" href="#portfolio">Work</a></li>
+        <li class="nav-item"><a class="nav-link" href="#testimonials">Clients</a></li>
+        <li class="nav-item ms-2"><a class="nav-link btn-nav" href="#cta">Start a Project</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">GROW</div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-tag"><i class="bi bi-lightning-fill me-1"></i> Digital Marketing Agency</div>
+        <h1>We Make<br>Brands <em>Break</em><br>Through.</h1>
+        <p class="hero-sub">Full-service digital marketing, creative design, and video production — built to grow your brand and outpace your competition.</p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn-primary-apex">Explore Services <i class="bi bi-arrow-right"></i></a>
+          <a href="#portfolio" class="btn-outline-apex">View Our Work</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">200+</div>
+            <div class="stat-label">Brands Scaled</div>
+          </div>
+          <div>
+            <div class="stat-num">8yr</div>
+            <div class="stat-label">In the Game</div>
+          </div>
+          <div>
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Retention Rate</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-visual">
+          <!-- Floating Card 1 -->
+          <div class="card-float card-main">
+            <div class="card-title">Campaign Performance</div>
+            <div class="growth-bar-wrap">
+              <div>
+                <div class="growth-bar-label"><span>Organic Reach</span><span>+184%</span></div>
+                <div class="growth-bar-track"><div class="growth-bar-fill" style="width:82%"></div></div>
+              </div>
+              <div>
+                <div class="growth-bar-label"><span>Conversions</span><span>+67%</span></div>
+                <div class="growth-bar-track"><div class="growth-bar-fill" style="width:60%"></div></div>
+              </div>
+              <div>
+                <div class="growth-bar-label"><span>Brand Recall</span><span>+210%</span></div>
+                <div class="growth-bar-track"><div class="growth-bar-fill" style="width:92%"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating Card 2 -->
+          <div class="card-float card-metric">
+            <div class="card-title">ROI Average</div>
+            <div class="big-num">4.8<span>×</span></div>
+            <div class="big-sub">Return on ad spend</div>
+          </div>
+          <!-- Floating Card 3 -->
+          <div class="card-float card-tag2">
+            <div class="pill">Live Project</div>
+            <div style="margin-top:0.8rem; font-size:0.8rem; color:var(--mid);">SaasFlow Rebrand</div>
+            <div style="margin-top:0.3rem; font-size:0.72rem; color:#aaa;">Active · 3 deliverables</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Digital Marketing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Brand Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Graphic Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Video Editing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Social Media <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">SEO & SEM <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Content Creation <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Motion Graphics <span class="marquee-dot">✦</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Digital Marketing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Brand Strategy <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Graphic Design <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Video Editing <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Social Media <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">SEO & SEM <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Content Creation <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Motion Graphics <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="row justify-content-between align-items-end mb-5">
+      <div class="col-lg-6">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Services Engineered<br>for Growth</h2>
+      </div>
+      <div class="col-lg-4">
+        <p style="color:var(--mid); font-size:0.93rem; line-height:1.75;">We combine data-driven strategy with bold creative execution — helping brands win across every digital channel.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <!-- Digital Marketing -->
+      <div class="col-lg-4 col-md-6 reveal">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h3>Digital Marketing</h3>
+          <p>Data-driven campaigns across search, social, and display — crafted to maximize reach, conversions, and return on every rupee spent.</p>
+          <div class="service-tags">
+            <span class="tag">SEO / SEM</span>
+            <span class="tag">Social Ads</span>
+            <span class="tag">Email</span>
+            <span class="tag">Analytics</span>
+            <span class="tag">CRO</span>
+          </div>
+        </div>
+      </div>
+      <!-- Graphic Design -->
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.1s">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-palette2"></i></div>
+          <h3>Graphic Design</h3>
+          <p>Visual identities, marketing collateral, and UI assets that communicate your brand's essence instantly and memorably.</p>
+          <div class="service-tags">
+            <span class="tag">Brand Identity</span>
+            <span class="tag">Logo Design</span>
+            <span class="tag">Print</span>
+            <span class="tag">Social Assets</span>
+            <span class="tag">UI Design</span>
+          </div>
+        </div>
+      </div>
+      <!-- Video Editing -->
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.2s">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-camera-video-fill"></i></div>
+          <h3>Video Editing</h3>
+          <p>From short-form reels to full brand films — cinematic storytelling and motion graphics that stop the scroll and drive action.</p>
+          <div class="service-tags">
+            <span class="tag">Reels & Shorts</span>
+            <span class="tag">Brand Films</span>
+            <span class="tag">Motion GFX</span>
+            <span class="tag">Ad Creatives</span>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Services Row -->
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.1s">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-megaphone-fill"></i></div>
+          <h3>Social Media Management</h3>
+          <p>Consistent, on-brand presence across all platforms with strategic content calendars, community management, and growth hacking.</p>
+          <div class="service-tags">
+            <span class="tag">Instagram</span>
+            <span class="tag">LinkedIn</span>
+            <span class="tag">YouTube</span>
+            <span class="tag">X / Twitter</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.2s">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-search"></i></div>
+          <h3>SEO & Content Strategy</h3>
+          <p>Long-game organic growth through keyword research, technical SEO, and high-value content that earns authority and rankings.</p>
+          <div class="service-tags">
+            <span class="tag">On-Page SEO</span>
+            <span class="tag">Link Building</span>
+            <span class="tag">Blogging</span>
+            <span class="tag">Technical SEO</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.3s">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-bar-chart-fill"></i></div>
+          <h3>Performance Analytics</h3>
+          <p>Real-time dashboards, attribution modeling, and actionable reporting so you always know exactly where your budget is working.</p>
+          <div class="service-tags">
+            <span class="tag">GA4</span>
+            <span class="tag">Attribution</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">Reporting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="section-label">How We Work</div>
+        <h2 class="section-title" style="color:var(--cream);">Simple Process,<br>Powerful Results</h2>
+        <div style="margin-top:3rem;">
+          <div class="process-step">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h4>Discovery & Strategy</h4>
+              <p>We deep-dive into your business, audience, and goals — then build a strategy that's uniquely yours, not a template.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h4>Creative Development</h4>
+              <p>Our designers and content creators bring the strategy to life with bold, on-brand creative assets across all formats.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h4>Launch & Optimise</h4>
+              <p>We deploy campaigns, monitor performance in real time, and iterate continuously for peak efficiency.</p>
+            </div>
+          </div>
+          <div class="process-step" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h4>Report & Scale</h4>
+              <p>Transparent reporting every step of the way. When results arrive, we scale what works and cut what doesn't.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="process-visual">
+          <div class="big-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+          <h3 style="font-family:'Syne',sans-serif; font-weight:800; font-size:1.8rem; color:var(--cream); letter-spacing:-0.03em;">Ready to Launch?</h3>
+          <p>From kickoff to first results in as little as 2 weeks. We move fast without breaking things.</p>
+          <a href="#cta" class="btn-acid" style="margin-top:0.5rem; display:inline-block;">Book a Free Strategy Call</a>
+          <div style="display:flex; gap:2rem; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08);">
+            <div style="text-align:center;">
+              <div style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:var(--acid);">2 wks</div>
+              <div style="font-size:0.75rem; color:rgba(245,240,232,0.4); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem;">Avg Onboard</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:var(--acid);">24h</div>
+              <div style="font-size:0.75rem; color:rgba(245,240,232,0.4); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem;">Response Time</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; color:var(--acid);">∞</div>
+              <div style="font-size:0.75rem; color:rgba(245,240,232,0.4); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.2rem;">Revisions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" style="background:#f0ece0;">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-5 flex-wrap gap-3">
+      <div>
+        <div class="section-label">Selected Work</div>
+        <h2 class="section-title">Built for the Bold</h2>
+      </div>
+      <a href="#cta" class="btn-outline-apex">Start Your Project</a>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="port-item">
+        <div class="port-bg" style="background:linear-gradient(135deg,#0D0D0D,#2d2d2d);">🛍️</div>
+        <div class="port-overlay">
+          <div>
+            <div class="port-label">NovaMart Rebrand</div>
+            <div class="port-cat">Brand Identity · Graphic Design</div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item">
+        <div class="port-bg" style="background:linear-gradient(135deg,#E8440A,#ff7b50);">🎬</div>
+        <div class="port-overlay">
+          <div>
+            <div class="port-label">PulseWear Campaign Film</div>
+            <div class="port-cat">Video Editing · Motion GFX</div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item">
+        <div class="port-bg" style="background:linear-gradient(135deg,#1A1A2E,#16213E);">📈</div>
+        <div class="port-overlay">
+          <div>
+            <div class="port-label">SkyFinance Ads</div>
+            <div class="port-cat">Performance Marketing</div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item">
+        <div class="port-bg" style="background:linear-gradient(135deg,#C8FF00,#a0cc00);">✨</div>
+        <div class="port-overlay">
+          <div>
+            <div class="port-label">GreenRoot Social</div>
+            <div class="port-cat">Social Media · Content</div>
+          </div>
+        </div>
+      </div>
+      <div class="port-item">
+        <div class="port-bg" style="background:linear-gradient(135deg,#7B2FBE,#5a189a);">🎵</div>
+        <div class="port-overlay">
+          <div>
+            <div class="port-label">Lyric Music Promo</div>
+            <div class="port-cat">Video Editing · Reels</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-7">
+        <div class="section-label" style="justify-content:center;">Why APEX</div>
+        <h2 class="section-title">The Difference Is<br>in the Details</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="why-card">
+          <div class="why-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h5>Speed Without Sacrifice</h5>
+          <p>Fast turnarounds without cutting corners. We've built workflows that deliver quality at pace.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal" style="transition-delay:0.1s">
+        <div class="why-card">
+          <div class="why-icon"><i class="bi bi-shield-check-fill"></i></div>
+          <h5>Results Guaranteed</h5>
+          <p>We stake our reputation on outcomes, not just deliverables. If the numbers don't move, we work until they do.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal" style="transition-delay:0.2s">
+        <div class="why-card">
+          <div class="why-icon"><i class="bi bi-people-fill"></i></div>
+          <h5>Dedicated Team</h5>
+          <p>You get a dedicated strategist, designer, and content creator — not a rotating roster of juniors.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal" style="transition-delay:0.3s">
+        <div class="why-card">
+          <div class="why-icon"><i class="bi bi-transparency"></i></div>
+          <h5>Radical Transparency</h5>
+          <p>Live dashboards, weekly reports, and zero agency jargon — you always know exactly what's happening.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-6">
+        <div class="section-label" style="justify-content:center;">Client Stories</div>
+        <h2 class="section-title">Brands That Trusted<br>the Process</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"APEX took our social media from an afterthought to our #1 lead source. The design work is consistently stunning and the team actually gets our brand."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#E8440A;">RK</div>
+            <div>
+              <div class="testi-name">Ravi Krishnamurthy</div>
+              <div class="testi-role">CEO, NovaMart India</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal" style="transition-delay:0.1s">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The video campaign they produced for us hit 2M views in the first week. The ROI on our digital ads has been a game-changer for the business."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:#1A1A2E;">SL</div>
+            <div>
+              <div class="testi-name">Sarah Lim</div>
+              <div class="testi-role">Marketing Director, PulseWear</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal" style="transition-delay:0.2s">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"We went from 0 to 18k followers and doubled our monthly revenue in 6 months. APEX doesn't promise results — they deliver them."</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:var(--rust);">AM</div>
+            <div>
+              <div class="testi-name">Aarav Mehta</div>
+              <div class="testi-role">Founder, GreenRoot</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container position-relative">
+    <h2>Let's Build Something<br><em>Unforgettable.</em></h2>
+    <p>Book a free 30-minute strategy call — no fluff, just clarity.</p>
+    <div class="cta-buttons">
+      <a href="mailto:hello@apexdigital.agency" class="btn-acid">Get a Free Strategy Call</a>
+      <a href="#portfolio" class="btn-ghost">View Our Work First</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a class="footer-brand" href="#">APE<span>X</span></a>
+        <p class="footer-desc">A full-service digital marketing agency that helps ambitious brands grow faster, look better, and reach further.</p>
+      </div>
+      <div class="col-lg-2 col-6">
+        <div class="footer-heading">Services</div>
+        <ul>
+          <li><a href="#">Digital Marketing</a></li>
+          <li><a href="#">Graphic Design</a></li>
+          <li><a href="#">Video Editing</a></li>
+          <li><a href="#">Social Media</a></li>
+          <li><a href="#">SEO & Content</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-6">
+        <div class="footer-heading">Company</div>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Work</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-heading">Get in Touch</div>
+        <ul>
+          <li><a href="mailto:hello@apexdigital.agency"><i class="bi bi-envelope me-2"></i>hello@apexdigital.agency</a></li>
+          <li><a href="tel:+919876543210"><i class="bi bi-telephone me-2"></i>+91 98765 43210</a></li>
+          <li style="color:rgba(245,240,232,0.4);"><i class="bi bi-geo-alt me-2"></i>Mumbai · Bangalore · Delhi</li>
+        </ul>
+        <div style="margin-top:1.5rem; font-size:0.82rem; color:rgba(245,240,232,0.3);">
+          Mon–Sat · 9:00 AM – 7:00 PM IST
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="font-size:0.8rem;">© 2025 APEX Digital Agency. All rights reserved.</div>
+      <div class="social-links">
+        <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+        <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="social-btn"><i class="bi bi-behance"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Navbar shrink on scroll
+  window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 60) {
+      navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.06)';
+    } else {
+      navbar.style.boxShadow = 'none';
+    }
+  });
+</script>
+</body>
+</html>
